@@ -74,7 +74,7 @@
                 </span>
                 <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Selamat Datang di Portal MIS Ihyaul Islam</h2>
                 <p class="text-green-100 text-sm max-w-2xl mx-auto leading-relaxed">
-                    Sistem informasi pemantauan kehadiran, hasil belajar, dan kedisiplinan siswa-siswi Madrasah Ibtidaiyah Swasta (MIS) Ihyaul Islam secara online, transparan, dan akurat.
+                    Sistem informasi pemantauan kehadiran per pergantian jam, hasil belajar, dan kedisiplinan siswa-siswi Madrasah Ibtidaiyah Swasta (MIS) Ihyaul Islam secara online, transparan, dan akurat.
                 </p>
                 <div class="pt-3 flex flex-wrap justify-center gap-3">
                     <button onclick="openLoginModal('wali')" class="bg-white text-green-800 hover:bg-green-50 font-bold px-6 py-2.5 rounded-xl text-sm shadow transition flex items-center gap-2">
@@ -92,9 +92,9 @@
                     <div class="w-11 h-11 bg-green-100 text-green-700 rounded-xl flex items-center justify-center">
                         <i data-lucide="calendar-check" class="w-6 h-6"></i>
                     </div>
-                    <h3 class="font-bold text-slate-800 text-base">Pemantauan Kehadiran</h3>
+                    <h3 class="font-bold text-slate-800 text-base">Pemantauan Kehadiran Per Jam</h3>
                     <p class="text-xs text-slate-600 leading-relaxed">
-                        Pantau rekapitulasi kehadiran putra/putri setiap hari secara rinci, meliputi <strong>absensi harian madrasah</strong>, <strong>sholat dhuha/dzuhur berjamaah</strong>, dan <strong>tahfidz / mengaji</strong>.
+                        Pantau rekapitulasi kehadiran putra/putri untuk <strong>3 pergantian jam per hari</strong> beserta <strong>mata pelajaran</strong> dan <strong>guru pengabsen</strong> secara rinci.
                     </p>
                 </div>
 
@@ -157,7 +157,7 @@
                             <span class="w-6 h-6 rounded-full bg-green-100 text-green-800 font-bold flex items-center justify-center shrink-0">3</span>
                             <div>
                                 <strong class="text-slate-800 block text-sm">Pantau Laporan Putra/Putri Secara Real-Time</strong>
-                                Dashboard kehadiran, nilai ujian, serta catatan kedisiplinan anak Anda akan langsung tampil.
+                                Dashboard kehadiran per jam, nilai ujian, serta catatan kedisiplinan anak Anda akan langsung tampil.
                             </div>
                         </li>
                     </ol>
@@ -233,14 +233,18 @@
                 <div class="p-2 bg-green-100 text-green-700 rounded-lg shrink-0 mt-0.5"><i data-lucide="megaphone" class="w-5 h-5"></i></div>
                 <div class="space-y-1">
                     <h4 class="font-bold text-green-950 text-sm">Informasi Wali Murid MIS Ihyaul Islam</h4>
-                    <p class="text-xs text-green-800 leading-relaxed">Selamat datang Ayah/Bunda di Portal Resmi MIS Ihyaul Islam. Mohon terus mendampingi ananda dalam muraja'ah hafalan dan belajar di rumah.</p>
+                    <p class="text-xs text-green-800 leading-relaxed">Selamat datang Ayah/Bunda di Portal Resmi MIS Ihyaul Islam. Absensi dihitung <strong>per pergantian jam (3 sesi per hari)</strong>—3 sesi setara ±1 hari penuh. Mohon terus mendampingi ananda dalam muraja'ah hafalan dan belajar di rumah.</p>
                 </div>
             </div>
 
             <!-- STATS WALI -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div class="bg-white p-5 rounded-xl shadow-sm border border-green-100 flex items-center justify-between">
-                    <div><p class="text-xs font-semibold text-slate-500 uppercase">Kehadiran (Total Hadir)</p><h3 id="statAttendance" class="text-xl font-bold text-green-700">0 Hari</h3></div>
+                    <div>
+                        <p class="text-xs font-semibold text-slate-500 uppercase">Kehadiran (Total Hadir)</p>
+                        <h3 id="statAttendance" class="text-xl font-bold text-green-700">0 Sesi</h3>
+                        <p id="statAttendanceDays" class="text-[11px] text-slate-500 mt-0.5">±0 Hari (3 jam/hari)</p>
+                    </div>
                     <div class="p-3 bg-green-50 text-green-700 rounded-lg"><i data-lucide="calendar-check" class="w-6 h-6"></i></div>
                 </div>
                 <div class="bg-white p-5 rounded-xl shadow-sm border border-green-100 flex items-center justify-between">
@@ -267,7 +271,10 @@
             <!-- REKAP KEHADIRAN WALI -->
             <div class="bg-white rounded-xl shadow-sm border border-green-100 overflow-hidden">
                 <div class="p-4 bg-green-50/70 border-b border-green-100 flex flex-wrap justify-between items-center gap-4">
-                    <h3 class="font-bold text-green-950 flex items-center gap-2"><i data-lucide="clock" class="w-4 h-4 text-green-700"></i> Rekap & Riwayat Kehadiran Siswa</h3>
+                    <div>
+                        <h3 class="font-bold text-green-950 flex items-center gap-2"><i data-lucide="clock" class="w-4 h-4 text-green-700"></i> Rekap & Riwayat Kehadiran Siswa (3 Pergantian Jam / Hari)</h3>
+                        <p class="text-[11px] text-slate-500">1 hari terdiri dari 3 pergantian jam (Jam Ke-1, Jam Ke-2, Jam Ke-3)</p>
+                    </div>
                     <div class="flex items-center gap-2">
                         <label class="text-xs font-semibold text-slate-600">Pilih Bulan:</label>
                         <select id="filterBulanAbsen" onchange="filterAttendanceByMonth()" class="bg-white border border-green-200 rounded-lg px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm">
@@ -276,12 +283,62 @@
                     </div>
                 </div>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-3 p-4 bg-green-50/30 border-b border-green-100">
-                    <div class="bg-green-50 border border-green-200 rounded-lg p-3 text-center"><span class="text-[11px] font-semibold text-green-700 uppercase">Hadir</span><h4 id="rekapHadir" class="text-lg font-bold text-green-800">0</h4></div>
-                    <div class="bg-teal-50 border border-teal-200 rounded-lg p-3 text-center"><span class="text-[11px] font-semibold text-teal-700 uppercase">Izin</span><h4 id="rekapIzin" class="text-lg font-bold text-teal-800">0</h4></div>
-                    <div class="bg-amber-50 border border-amber-200 rounded-lg p-3 text-center"><span class="text-[11px] font-semibold text-amber-700 uppercase">Sakit</span><h4 id="rekapSakit" class="text-lg font-bold text-amber-800">0</h4></div>
-                    <div class="bg-red-50 border border-red-200 rounded-lg p-3 text-center"><span class="text-[11px] font-semibold text-red-700 uppercase">Alpha</span><h4 id="rekapAlpha" class="text-lg font-bold text-red-800">0</h4></div>
+                    <div class="bg-green-50 border border-green-200 rounded-lg p-3 text-center">
+                        <span class="text-[11px] font-semibold text-green-700 uppercase">Hadir</span>
+                        <h4 id="rekapHadir" class="text-lg font-bold text-green-800">0</h4>
+                        <p id="estHariHadir" class="text-[11px] text-green-700 font-medium">±0 hari</p>
+                    </div>
+                    <div class="bg-teal-50 border border-teal-200 rounded-lg p-3 text-center">
+                        <span class="text-[11px] font-semibold text-teal-700 uppercase">Izin</span>
+                        <h4 id="rekapIzin" class="text-lg font-bold text-teal-800">0</h4>
+                        <p id="estHariIzin" class="text-[11px] text-teal-700 font-medium">±0 hari</p>
+                    </div>
+                    <div class="bg-amber-50 border border-amber-200 rounded-lg p-3 text-center">
+                        <span class="text-[11px] font-semibold text-amber-700 uppercase">Sakit</span>
+                        <h4 id="rekapSakit" class="text-lg font-bold text-amber-800">0</h4>
+                        <p id="estHariSakit" class="text-[11px] text-amber-700 font-medium">±0 hari</p>
+                    </div>
+                    <div class="bg-red-50 border border-red-200 rounded-lg p-3 text-center">
+                        <span class="text-[11px] font-semibold text-red-700 uppercase">Alpha</span>
+                        <h4 id="rekapAlpha" class="text-lg font-bold text-red-800">0</h4>
+                        <p id="estHariAlpha" class="text-[11px] text-red-700 font-medium">±0 hari (3 sesi = 1 hari)</p>
+                    </div>
                 </div>
-                <div class="overflow-x-auto"><table class="w-full text-sm text-left"><thead class="bg-green-50 text-green-900 uppercase text-xs"><tr><th class="p-3">Hari & Tanggal</th><th class="p-3">Kegiatan</th><th class="p-3">Status</th><th class="p-3">Keterangan</th></tr></thead><tbody id="attendanceTableBody" class="divide-y divide-slate-200"></tbody></table></div>
+
+                <!-- RINCIAN HARI & JAM KEBERAPA IZIN / ALPHA -->
+                <div id="rincianIzinAlphaContainer" class="p-4 bg-white border-b border-green-100 grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="space-y-2">
+                        <h4 class="text-xs font-bold text-teal-900 uppercase flex items-center gap-1.5">
+                            <i data-lucide="file-check" class="w-4 h-4 text-teal-600"></i> Rincian Hari & Jam Izin
+                        </h4>
+                        <div id="rincianIzinList" class="space-y-2 text-xs">
+                            <p class="text-slate-400 italic">Tidak ada catatan izin.</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <h4 class="text-xs font-bold text-red-900 uppercase flex items-center gap-1.5">
+                            <i data-lucide="user-x" class="w-4 h-4 text-red-600"></i> Rincian Hari & Jam Alpha
+                        </h4>
+                        <div id="rincianAlphaList" class="space-y-2 text-xs">
+                            <p class="text-slate-400 italic">Tidak ada catatan alpha.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+                        <thead class="bg-green-50 text-green-900 uppercase text-xs">
+                            <tr>
+                                <th class="p-3">Hari & Tanggal</th>
+                                <th class="p-3">Sesi & Waktu</th>
+                                <th class="p-3">Mapel & Guru Pengabsen</th>
+                                <th class="p-3">Status</th>
+                                <th class="p-3">Keterangan</th>
+                            </tr>
+                        </thead>
+                        <tbody id="attendanceTableBody" class="divide-y divide-slate-200"></tbody>
+                    </table>
+                </div>
             </div>
 
             <!-- TABEL RANGKUMAN RAPOR -->
@@ -347,7 +404,7 @@
                     <div class="p-3 bg-green-50 text-green-700 rounded-xl"><i data-lucide="users" class="w-6 h-6"></i></div>
                 </div>
                 <div class="bg-white p-5 rounded-xl shadow-sm border border-green-100 flex items-center justify-between">
-                    <div><p class="text-xs font-semibold text-slate-500 uppercase">Hadir Hari Ini</p><h3 id="adminStatHadirHariIni" class="text-2xl font-bold text-emerald-700">0 Siswa</h3></div>
+                    <div><p class="text-xs font-semibold text-slate-500 uppercase">Hadir Hari Ini</p><h3 id="adminStatHadirHariIni" class="text-2xl font-bold text-emerald-700">0 Sesi</h3></div>
                     <div class="p-3 bg-emerald-50 text-emerald-700 rounded-xl"><i data-lucide="user-check" class="w-6 h-6"></i></div>
                 </div>
                 <div class="bg-white p-5 rounded-xl shadow-sm border border-green-100 flex items-center justify-between">
@@ -361,7 +418,7 @@
                 <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2"><i data-lucide="zap" class="w-4 h-4 text-green-700"></i> Akses Pintar & Shortcut Cepat</h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
                     <button type="button" onclick="switchInputMode('absensi'); document.getElementById('panelInputUtama').scrollIntoView({behavior: 'smooth'});" class="p-3 bg-green-50 hover:bg-green-100 border border-green-200 text-green-900 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition shadow-xs">
-                        <i data-lucide="calendar-check" class="w-4 h-4"></i> Input Absensi Harian
+                        <i data-lucide="calendar-check" class="w-4 h-4"></i> Input Absensi Per Jam
                     </button>
                     <button type="button" onclick="switchInputMode('barcode'); document.getElementById('panelInputUtama').scrollIntoView({behavior: 'smooth'});" class="p-3 bg-teal-50 hover:bg-teal-100 border border-teal-200 text-teal-900 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition shadow-xs">
                         <i data-lucide="qr-code" class="w-4 h-4"></i> Scan Barcode Absensi
@@ -506,8 +563,8 @@
                     <button type="button" onclick="switchInputMode('absensi')" id="btnModeAbsensi" class="p-3 rounded-xl border text-left font-bold text-sm transition flex items-center gap-3 bg-green-700 text-white shadow-sm">
                         <i data-lucide="calendar-check" class="w-5 h-5 shrink-0"></i>
                         <div>
-                            <div>Absensi Harian</div>
-                            <div class="text-[11px] font-normal opacity-90">Input massal per kelas</div>
+                            <div>Absensi Per Jam</div>
+                            <div class="text-[11px] font-normal opacity-90">3 pergantian jam/hari</div>
                         </div>
                     </button>
                     <button type="button" onclick="switchInputMode('barcode')" id="btnModeBarcode" class="p-3 rounded-xl border text-left font-bold text-sm transition flex items-center gap-3 bg-white text-slate-700 hover:bg-green-50 shadow-sm">
@@ -544,7 +601,7 @@
                 <form onsubmit="handleStaffSubmitData(event)" class="space-y-4 pt-3">
                     <input type="hidden" id="inputType" value="absensi">
                     <div id="dynamicFormFields" class="space-y-4"></div>
-                    <button type="submit" id="submitButtonMain" class="w-full bg-green-700 hover:bg-green-800 text-white font-bold py-2.5 rounded-lg text-sm shadow">Simpan Absensi Massal</button>
+                    <button type="submit" id="submitButtonMain" class="w-full bg-green-700 hover:bg-green-800 text-white font-bold py-2.5 rounded-lg text-sm shadow">Simpan Absensi Per Jam</button>
                 </form>
             </div>
         </section>
@@ -605,6 +662,7 @@
         let cachedPengumuman = [];
         let currentStudentInfo = null;
         let currentSchoolLogoUrl = "";
+        let currentStaffName = "Administrator MIS Ihyaul Islam";
         let availableTahunAjaran = ["2026/2027", "2025/2026", "2024/2025"];
         let scoreTrendChartInstance = null;
 
@@ -620,6 +678,96 @@
             mi_umum: ["Matematika", "Bahasa Indonesia", "IPAS", "Pendidikan Pancasila (PPKn)", "PJOK", "Seni Budaya (SBdP)", "Bahasa Inggris"]
         };
 
+        let customSavedMapels = [];
+        try {
+            const savedCustom = localStorage.getItem('mis_custom_mapels_v1');
+            if (savedCustom) {
+                customSavedMapels = JSON.parse(savedCustom);
+                customSavedMapels.forEach(m => {
+                    if (!CURRICULUM_MAPELS.mi_agama.some(x => x.toLowerCase() === m.toLowerCase()) &&
+                        !CURRICULUM_MAPELS.mi_umum.some(x => x.toLowerCase() === m.toLowerCase())) {
+                        CURRICULUM_MAPELS.mi_agama.push(m);
+                    }
+                });
+            }
+        } catch (e) {}
+
+        function getCombinedAllMapels() {
+            const seen = new Set();
+            const merged = [];
+            const baseList = [
+                "Pembiasaan Pagi / Wali Kelas",
+                ...CURRICULUM_MAPELS.mi_agama,
+                ...CURRICULUM_MAPELS.mi_umum,
+                ...customSavedMapels,
+                "Bahasa Daerah"
+            ];
+            baseList.forEach(m => {
+                const clean = String(m || "").trim();
+                if (clean && !seen.has(clean.toLowerCase())) {
+                    seen.add(clean.toLowerCase());
+                    merged.push(clean);
+                }
+            });
+            return merged;
+        }
+
+        function registerGlobalCustomMapel(mapelName, targetJenjang = 'mi_agama') {
+            const clean = String(mapelName || "").trim();
+            if (!clean) return false;
+
+            const allList = getCombinedAllMapels();
+            const alreadyInAll = allList.some(m => m.toLowerCase() === clean.toLowerCase());
+
+            if (!customSavedMapels.some(m => m.toLowerCase() === clean.toLowerCase())) {
+                customSavedMapels.push(clean);
+                try {
+                    localStorage.setItem('mis_custom_mapels_v1', JSON.stringify(customSavedMapels));
+                } catch (e) {}
+            }
+
+            if (CURRICULUM_MAPELS[targetJenjang] &&
+                !CURRICULUM_MAPELS[targetJenjang].some(m => m.toLowerCase() === clean.toLowerCase())) {
+                CURRICULUM_MAPELS[targetJenjang].push(clean);
+            }
+
+            syncAllMapelSelectDropdowns(clean);
+            return !alreadyInAll;
+        }
+
+        function syncAllMapelSelectDropdowns(selectValue = null) {
+            ['scanMapel', 'absenMapel'].forEach(selectId => {
+                const el = document.getElementById(selectId);
+                if (el) {
+                    const currentVal = selectValue || el.value || "Pembiasaan Pagi / Wali Kelas";
+                    el.innerHTML = getMapelSelectOptionsHtml(currentVal);
+                }
+            });
+        }
+
+        function quickAddMapelFromAbsen(mode) {
+            const inputId = mode === 'barcode' ? 'scanNewMapelInput' : 'absenNewMapelInput';
+            const selectId = mode === 'barcode' ? 'scanMapel' : 'absenMapel';
+            const inputEl = document.getElementById(inputId);
+            if (!inputEl) return;
+
+            const mapelName = inputEl.value.trim();
+            if (!mapelName) {
+                showToast("Ketik nama mata pelajaran baru terlebih dahulu!", "error");
+                inputEl.focus();
+                return;
+            }
+
+            registerGlobalCustomMapel(mapelName, 'mi_agama');
+            const selectEl = document.getElementById(selectId);
+            if (selectEl) {
+                selectEl.innerHTML = getMapelSelectOptionsHtml(mapelName);
+                selectEl.value = mapelName;
+            }
+            inputEl.value = "";
+            showToast(`Mata pelajaran "${mapelName}" ditambahkan & otomatis tersinkron ke Scan Barcode dan Legger!`, "success");
+        }
+
         // --- HELPER NORMALISASI DATA ---
         function normalizePhone(phone) {
             let p = String(phone || "").replace(/\D/g, "");
@@ -634,6 +782,31 @@
 
         function renderIconsSafe(root = document) {
             if (window.lucide) lucide.createIcons({ root });
+        }
+
+        function getMapelSelectOptionsHtml(selectedVal = "Pembiasaan Pagi / Wali Kelas") {
+            const list = getCombinedAllMapels();
+            return list.map(m =>
+                `<option value="${m}" ${m.toLowerCase() === String(selectedVal).toLowerCase() ? 'selected' : ''}>${m}</option>`
+            ).join('');
+        }
+
+        function konversiSesiKeHari(jumlahSesi) {
+            const total = Number(jumlahSesi || 0);
+            if (total <= 0) return "±0 hari";
+            const hari = Math.floor(total / 3);
+            const sisaJam = total % 3;
+            if (hari > 0 && sisaJam > 0) return `±${hari} hari ${sisaJam} jam`;
+            if (hari > 0) return `±${hari} hari`;
+            return `${sisaJam} jam (kurang dari 1 hari)`;
+        }
+
+        function urutanSesiJam(sesiStr = "") {
+            const s = String(sesiStr).toLowerCase();
+            if (s.includes("1")) return 1;
+            if (s.includes("2")) return 2;
+            if (s.includes("3")) return 3;
+            return 99;
         }
 
         // --- MODUL LOGO MADRASAH (SUPABASE STORAGE) ---
@@ -731,7 +904,7 @@
         // =========================================================================
         // MODUL NOTIFIKASI WHATSAPP OTOMATIS (FONNTE API)
         // =========================================================================
-        async function sendWhatsappNotification(student, kegiatan, status, tanggal, keterangan = '') {
+        async function sendWhatsappNotification(student, sesiJam, status, tanggal, keterangan = '', mapel = '-', guruPengabsen = '') {
             if (!WA_GATEWAY_TOKEN || WA_GATEWAY_TOKEN.includes("ISI_TOKEN")) return false;
             const rawWa = normalizePhone(student.noWa);
             if (!rawWa || rawWa === "-") return false;
@@ -739,6 +912,8 @@
             const targetWa = "62" + rawWa;
             const waktu = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
             const tglIndo = formatDateWithDay(tanggal);
+            const pengabsenFinal = guruPengabsen || currentStaffName || '-';
+            const mapelFinal = mapel || '-';
             const ketLine = (keterangan && keterangan !== '-' && keterangan !== 'Scan Barcode') ? `• *Keterangan:* ${keterangan}\n` : '';
 
             const pesan = `*INFO KEHADIRAN SISWA*\n` +
@@ -748,11 +923,13 @@
                           `• *Nama:* ${student.nama}\n` +
                           `• *NIS:* ${student.nis}\n` +
                           `• *Kelas:* ${student.kelas}\n` +
-                          `• *Kegiatan:* ${kegiatan}\n` +
+                          `• *Hari/Tanggal:* ${tglIndo}\n` +
+                          `• *Sesi Jam:* ${sesiJam} (Pukul ${waktu} WIB)\n` +
+                          `• *Mata Pelajaran:* ${mapelFinal}\n` +
+                          `• *Guru Pengabsen:* ${pengabsenFinal}\n` +
                           `• *Status:* *${status.toUpperCase()}*\n` +
                           ketLine +
-                          `• *Waktu:* ${tglIndo}, Pukul ${waktu} WIB\n\n` +
-                          `Terima kasih atas perhatian dan kerja samanya.\n` +
+                          `\nTerima kasih atas perhatian dan kerja samanya.\n` +
                           `_Pesan otomatis dari Portal Akademik MIS Ihyaul Islam_`;
 
             try {
@@ -770,6 +947,22 @@
                 console.warn("Gagal mengirim notifikasi WA:", err);
                 return false;
             }
+        }
+
+        // Helper insert absensi dengan fallback bila kolom baru belum dibuat di DB
+        async function insertAttendanceSafe(rows) {
+            const { error } = await sb.from('absensi').insert(rows);
+            if (error && /sesi_jam|mapel|guru_pengabsen/i.test(error.message)) {
+                const legacyRows = rows.map(r => ({
+                    tanggal: r.tanggal,
+                    nis: r.nis,
+                    kegiatan: `${r.sesi_jam} - ${r.mapel || '-'}`,
+                    status: r.status,
+                    keterangan: `${r.keterangan || '-'} | Guru: ${r.guru_pengabsen || '-'}`
+                }));
+                return await sb.from('absensi').insert(legacyRows);
+            }
+            return { error };
         }
 
         // =========================================================================
@@ -1021,13 +1214,17 @@
 
                     if (staffData) {
                         closeModal('modalLogin');
-                        showToast('Login Berhasil!', 'success');
-                        document.getElementById('staffRoleBadge').textContent = staffData.nama_lengkap || 'Wali Kelas / Guru';
+                        currentStaffName = staffData.nama_lengkap || staffData.username || 'Wali Kelas / Guru';
+                        showToast(`Login Berhasil! Pengabsen: ${currentStaffName}`, 'success');
+                        document.getElementById('staffRoleBadge').textContent = currentStaffName;
+                        document.getElementById('staffNameDisplay').textContent = `Panel Input & Pengelolaan Data MIS Ihyaul Islam — ${currentStaffName}`;
                         switchView('staff');
                     } else if (val1 === 'admin' && val2 === 'admin123') {
                         closeModal('modalLogin');
+                        currentStaffName = 'Administrator MIS Ihyaul Islam';
                         showToast('Login Administrator MIS berhasil!', 'success');
-                        document.getElementById('staffRoleBadge').textContent = 'Administrator MIS Ihyaul Islam';
+                        document.getElementById('staffRoleBadge').textContent = currentStaffName;
+                        document.getElementById('staffNameDisplay').textContent = `Panel Input & Pengelolaan Data MIS Ihyaul Islam — ${currentStaffName}`;
                         switchView('staff');
                     } else {
                         showToast('Username atau Password salah.', 'error');
@@ -1067,6 +1264,9 @@
 
                 globalAdminScores = (resScores.data || []).reverse().map(sc => {
                     const info = sMap[normalizeNis(sc.nis)] || { nama: `Siswa (${sc.nis})`, kelas: '-' };
+                    if (sc.mata_pelajaran) {
+                        registerGlobalCustomMapel(sc.mata_pelajaran, 'mi_agama');
+                    }
                     return {
                         ...sc,
                         nama: info.nama,
@@ -1134,7 +1334,7 @@
                     .slice(0, 5);
 
                 document.getElementById('adminStatTotalSantri').textContent = totalSiswa;
-                document.getElementById('adminStatHadirHariIni').textContent = `${hadirHariIni} Siswa`;
+                document.getElementById('adminStatHadirHariIni').textContent = `${hadirHariIni} Sesi`;
                 document.getElementById('adminStatPoinBulanIni').textContent = `${totalPoinBulanIni} Poin`;
 
                 let tbody = document.getElementById('topViolationsTableBody');
@@ -1192,7 +1392,7 @@
 
             if (mode === 'absensi') {
                 btnAbsen.className = "p-3 rounded-xl border text-left font-bold text-sm transition flex items-center gap-3 bg-green-700 text-white shadow-sm";
-                btnSubmit.textContent = "Simpan Absensi Massal (Siswa Belum Tercatat)";
+                btnSubmit.textContent = "Simpan Absensi Per Jam (Siswa Belum Tercatat)";
                 btnSubmit.className = "w-full bg-green-700 hover:bg-green-800 text-white font-bold py-2.5 rounded-lg text-sm shadow";
                 
                 let kelasSet = new Set();
@@ -1208,11 +1408,11 @@
                                 <input type="date" id="absenTanggal" onchange="renderAbsensiChecklist()" required class="w-full bg-white border border-slate-300 rounded-lg p-2.5 text-sm" value="${new Date().toISOString().substring(0,10)}">
                             </div>
                             <div>
-                                <label class="block text-xs font-semibold text-slate-700 mb-1">Kegiatan</label>
-                                <select id="absenKegiatan" onchange="renderAbsensiChecklist()" class="w-full bg-white border border-slate-300 rounded-lg p-2.5 text-sm font-semibold">
-                                    <option value="Harian">Madrasah Harian (Pagi)</option>
-                                    <option value="Sholat Jamaah">Sholat Dhuha / Dzuhur Berjamaah</option>
-                                    <option value="Tahfidz">Tahfidz & Mengaji</option>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Pergantian Jam (3 Jam/Hari)</label>
+                                <select id="absenSesiJam" onchange="renderAbsensiChecklist()" class="w-full bg-white border border-slate-300 rounded-lg p-2.5 text-sm font-semibold text-green-900">
+                                    <option value="Jam Ke-1">Jam Ke-1 (Sesi 1)</option>
+                                    <option value="Jam Ke-2">Jam Ke-2 (Sesi 2)</option>
+                                    <option value="Jam Ke-3">Jam Ke-3 (Sesi 3)</option>
                                 </select>
                             </div>
                             <div>
@@ -1223,14 +1423,31 @@
                             </div>
                         </div>
 
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Mata Pelajaran (Mapel)</label>
+                                <select id="absenMapel" class="w-full bg-white border border-slate-300 rounded-lg p-2.5 text-sm font-semibold">
+                                    ${getMapelSelectOptionsHtml()}
+                                </select>
+                                <div class="flex gap-1.5 mt-1.5">
+                                    <input type="text" id="absenNewMapelInput" placeholder="Mapel belum ada? Ketik di sini..." class="flex-1 bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 text-xs focus:ring-1 focus:ring-green-600 outline-none">
+                                    <button type="button" onclick="quickAddMapelFromAbsen('absensi')" class="bg-green-700 hover:bg-green-800 text-white px-2.5 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap shadow-xs">+ Mapel</button>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Guru Pengabsen</label>
+                                <input type="text" id="absenGuruPengabsen" value="${currentStaffName}" required class="w-full bg-white border border-slate-300 rounded-lg p-2.5 text-sm font-semibold text-green-900">
+                            </div>
+                        </div>
+
                         <label class="flex items-center gap-2 text-xs font-semibold text-green-900 bg-white p-2.5 rounded-lg border border-green-200 cursor-pointer">
                             <input type="checkbox" id="waNotifyAbsenMassal" checked class="rounded text-green-700">
-                            <span>Kirim notifikasi WhatsApp otomatis ke orang tua bagi siswa yang berstatus <strong>Alpha, Izin, atau Sakit</strong></span>
+                            <span>Kirim notifikasi WhatsApp otomatis ke orang tua bagi siswa yang berstatus <strong>Alpha, Izin, atau Sakit</strong> (menyertakan jam, mapel & guru pengabsen)</span>
                         </label>
 
                         <div class="mt-2 pt-3 border-t border-green-200">
                             <h4 class="font-bold text-slate-700 text-xs uppercase mb-2 flex items-center gap-1.5">
-                                <i data-lucide="users" class="w-4 h-4 text-green-700"></i> Checklist Kehadiran Siswa (Siswa yang Sudah Scan Otomatis Terkunci)
+                                <i data-lucide="users" class="w-4 h-4 text-green-700"></i> Checklist Kehadiran Siswa (Siswa yang Sudah Tercatat di Sesi Ini Terkunci)
                             </h4>
                             <div class="overflow-x-auto max-h-96 bg-white rounded-lg border border-slate-200 shadow-inner">
                                 <table class="w-full text-xs text-left border-collapse">
@@ -1273,28 +1490,45 @@
                         <div class="flex flex-wrap justify-between items-center gap-2 border-b border-teal-200 pb-2">
                             <label class="flex items-center gap-2 text-xs font-semibold text-teal-950 cursor-pointer">
                                 <input type="checkbox" id="waNotifyBarcodeToggle" checked class="rounded text-teal-700">
-                                <span>Kirim notifikasi WhatsApp otomatis ke orang tua saat berhasil scan / input izin</span>
+                                <span>Kirim notifikasi WhatsApp otomatis ke orang tua saat berhasil scan / input izin (menyertakan jam, mapel & guru pengabsen)</span>
                             </label>
                             ${waReadyBadge}
                         </div>
 
-                        <!-- Pengaturan Sesi Absensi -->
+                        <!-- Pengaturan Sesi Absensi Per Jam -->
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div>
                                 <label class="block text-xs font-semibold text-slate-700 mb-1">Tanggal Absensi</label>
                                 <input type="date" id="scanTanggal" class="w-full bg-white border border-slate-300 rounded-lg p-2.5 text-sm" value="${new Date().toISOString().substring(0,10)}">
                             </div>
                             <div>
-                                <label class="block text-xs font-semibold text-slate-700 mb-1">Kegiatan</label>
-                                <select id="scanKegiatan" class="w-full bg-white border border-slate-300 rounded-lg p-2.5 text-sm font-semibold">
-                                    <option value="Harian">Madrasah Harian (Pagi)</option>
-                                    <option value="Sholat Jamaah">Sholat Dhuha / Dzuhur Berjamaah</option>
-                                    <option value="Tahfidz">Tahfidz & Mengaji</option>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Pergantian Jam (3 Jam/Hari)</label>
+                                <select id="scanSesiJam" class="w-full bg-white border border-slate-300 rounded-lg p-2.5 text-sm font-semibold text-teal-900">
+                                    <option value="Jam Ke-1">Jam Ke-1 (Sesi 1)</option>
+                                    <option value="Jam Ke-2">Jam Ke-2 (Sesi 2)</option>
+                                    <option value="Jam Ke-3">Jam Ke-3 (Sesi 3)</option>
                                 </select>
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-slate-700 mb-1">Input Manual / Scanner USB</label>
                                 <input type="text" id="usbBarcodeInput" onkeydown="if(event.key==='Enter'){event.preventDefault(); processScannedNis(this.value); this.value='';}" placeholder="Arahkan kursor & tembak barcode..." class="w-full bg-white border border-teal-500 rounded-lg p-2.5 text-sm font-mono font-bold focus:ring-2 focus:ring-teal-500 outline-none">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Mata Pelajaran (Mapel)</label>
+                                <select id="scanMapel" class="w-full bg-white border border-slate-300 rounded-lg p-2.5 text-sm font-semibold">
+                                    ${getMapelSelectOptionsHtml()}
+                                </select>
+                                <div class="flex gap-1.5 mt-1.5">
+                                    <input type="text" id="scanNewMapelInput" onkeydown="if(event.key==='Enter'){event.preventDefault(); quickAddMapelFromAbsen('barcode');}" placeholder="Mapel kurang? Ketik nama mapel baru..." class="flex-1 bg-white border border-teal-300 rounded-lg px-2.5 py-1.5 text-xs focus:ring-1 focus:ring-teal-600 outline-none">
+                                    <button type="button" onclick="quickAddMapelFromAbsen('barcode')" class="bg-teal-700 hover:bg-teal-800 text-white px-2.5 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap shadow-xs">+ Mapel</button>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Guru Pengabsen</label>
+                                <input type="text" id="scanGuruPengabsen" value="${currentStaffName}" required class="w-full bg-white border border-slate-300 rounded-lg p-2.5 text-sm font-semibold text-teal-950">
                             </div>
                         </div>
 
@@ -1379,6 +1613,11 @@
                 let studentOptionsHtml = `<option value="">-- Pilih Siswa --</option>` +
                     cachedAllStudents.map(s => `<option value="${s.nis}">${s.nama} — Kelas: ${s.kelas} (NIS: ${s.nis})</option>`).join('');
 
+                const datalistOptionsHtml = getCombinedAllMapels()
+                    .filter(m => m !== "Pembiasaan Pagi / Wali Kelas")
+                    .map(m => `<option value="${m}"></option>`)
+                    .join('');
+
                 fields.innerHTML = `
                     <div class="space-y-4 max-w-4xl bg-emerald-50/60 p-4 rounded-xl border border-emerald-200">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1398,27 +1637,13 @@
                         </div>
 
                         <div class="pt-3 border-t border-emerald-200/80">
-                            <label class="block text-xs font-semibold text-slate-700 mb-1.5">Tambah Kolom Mata Pelajaran Lainnya</label>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1.5">Tambah Kolom Mata Pelajaran Lainnya (Otomatis Masuk ke Scan Barcode)</label>
                             <div class="flex flex-col sm:flex-row items-center gap-2">
-                                <input type="text" id="newMapelSelect" list="bakuMapelList" placeholder="Ketik nama mapel baru atau klik untuk memilih daftar..." 
+                                <input type="text" id="newMapelSelect" list="bakuMapelList" onkeydown="if(event.key==='Enter'){event.preventDefault(); addCustomMapelColumn();}" placeholder="Ketik nama mapel baru atau klik untuk memilih daftar..." 
                                        class="w-full sm:flex-1 bg-white border border-slate-300 rounded-lg p-2.5 text-sm font-semibold focus:outline-none focus:border-green-600 focus:ring-2 focus:ring-green-200">
                                 
                                 <datalist id="bakuMapelList">
-                                    <option value="Al-Qur'an Hadits"></option>
-                                    <option value="Akidah Akhlak"></option>
-                                    <option value="Fiqih"></option>
-                                    <option value="Sejarah Kebudayaan Islam (SKI)"></option>
-                                    <option value="Bahasa Arab"></option>
-                                    <option value="Tahfidz Al-Qur'an"></option>
-                                    <option value="Tajwid"></option>
-                                    <option value="Matematika"></option>
-                                    <option value="Bahasa Indonesia"></option>
-                                    <option value="IPAS"></option>
-                                    <option value="Pendidikan Pancasila (PPKn)"></option>
-                                    <option value="PJOK"></option>
-                                    <option value="Seni Budaya (SBdP)"></option>
-                                    <option value="Bahasa Inggris"></option>
-                                    <option value="Bahasa Daerah"></option>
+                                    ${datalistOptionsHtml}
                                 </datalist>
 
                                 <button type="button" onclick="addCustomMapelColumn()" 
@@ -1556,19 +1781,29 @@
             const tbody = document.getElementById('monitoringAbsenBody');
             const filterEl = document.getElementById('filterKelasInput');
             const tanggal = document.getElementById('absenTanggal')?.value || new Date().toISOString().substring(0, 10);
-            const kegiatan = document.getElementById('absenKegiatan')?.value || 'Harian';
+            const sesiJam = document.getElementById('absenSesiJam')?.value || 'Jam Ke-1';
             if (!tbody) return;
 
-            tbody.innerHTML = `<tr><td colspan="4" class="p-3 text-center text-slate-400">Mengecek data scan barcode & absensi hari ini...</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="4" class="p-3 text-center text-slate-400">Mengecek data absensi ${sesiJam} hari ini...</td></tr>`;
 
-            const { data: existingRecords } = await sb.from('absensi')
-                .select('nis, status, keterangan')
+            let existingRecords = [];
+            const resBySesi = await sb.from('absensi')
+                .select('nis, status, keterangan, sesi_jam')
                 .eq('tanggal', tanggal)
-                .eq('kegiatan', kegiatan);
+                .eq('sesi_jam', sesiJam);
+
+            if (!resBySesi.error) {
+                existingRecords = resBySesi.data || [];
+            } else {
+                const resFallback = await sb.from('absensi')
+                    .select('nis, status, keterangan, kegiatan')
+                    .eq('tanggal', tanggal);
+                existingRecords = (resFallback.data || []).filter(r => String(r.kegiatan || '').includes(sesiJam));
+            }
 
             const recordedMap = {};
             alreadyScannedNisSet.clear();
-            (existingRecords || []).forEach(r => {
+            existingRecords.forEach(r => {
                 const nNis = normalizeNis(r.nis);
                 recordedMap[nNis] = r;
                 alreadyScannedNisSet.add(nNis);
@@ -1594,7 +1829,7 @@
                             <td class="p-2.5 font-mono text-xs text-green-800">${s.nis}</td>
                             <td class="p-2.5 font-semibold text-slate-800">
                                 ${s.nama}
-                                <span class="ml-1.5 text-[10px] bg-green-200 text-green-900 px-1.5 py-0.5 rounded font-bold">Tercatat (${existing.keterangan || existing.status})</span>
+                                <span class="ml-1.5 text-[10px] bg-green-200 text-green-900 px-1.5 py-0.5 rounded font-bold">Tercatat (${sesiJam})</span>
                             </td>
                             <td class="p-2.5 text-center">
                                 <span class="inline-block w-full bg-green-100 border border-green-300 rounded px-2 py-1.5 text-xs font-bold text-green-900">
@@ -1748,6 +1983,16 @@
             const jenjang = document.getElementById('inputJenjang') ? document.getElementById('inputJenjang').value : 'mi_agama';
             const isExist = CURRICULUM_MAPELS[jenjang].some(m => m.toLowerCase() === mapelName.toLowerCase());
 
+            registerGlobalCustomMapel(mapelName, jenjang);
+
+            const datalistEl = document.getElementById('bakuMapelList');
+            if (datalistEl) {
+                datalistEl.innerHTML = getCombinedAllMapels()
+                    .filter(m => m !== "Pembiasaan Pagi / Wali Kelas")
+                    .map(m => `<option value="${m}"></option>`)
+                    .join('');
+            }
+
             if (!isExist) {
                 const savedValues = {};
                 const mapelInputs = document.querySelectorAll('.mapel-name');
@@ -1760,7 +2005,6 @@
                     };
                 }
 
-                CURRICULUM_MAPELS[jenjang].push(mapelName);
                 renderMapelHorizontal();
 
                 const newMapelInputs = document.querySelectorAll('.mapel-name');
@@ -1775,9 +2019,10 @@
                 }
 
                 inputEl.value = "";
-                showToast(`Mata pelajaran "${mapelName}" berhasil ditambahkan ke tabel!`, 'success');
+                showToast(`Mata pelajaran "${mapelName}" berhasil ditambahkan & otomatis tersedia di Scan Barcode!`, 'success');
             } else {
-                showToast(`Mata pelajaran "${mapelName}" sudah ada di tabel!`, 'error');
+                inputEl.value = "";
+                showToast(`Mata pelajaran "${mapelName}" sudah ada di tabel & tersinkron di Scan Barcode!`, 'info');
             }
         }
 
@@ -2061,24 +2306,28 @@
 
             if (type === 'absensi') {
                 const tanggal = document.getElementById('absenTanggal').value;
-                const kegiatan = document.getElementById('absenKegiatan').value;
+                const sesiJam = document.getElementById('absenSesiJam').value;
+                const mapel = document.getElementById('absenMapel')?.value || '-';
+                const guruPengabsen = document.getElementById('absenGuruPengabsen')?.value.trim() || currentStaffName;
                 const sendWaNonHadir = document.getElementById('waNotifyAbsenMassal')?.checked;
                 const rows = document.querySelectorAll('.student-absen-row');
                 
                 if (rows.length === 0) {
-                    showToast('Seluruh siswa pada kelas ini sudah tercatat kehadirannya hari ini.', 'info');
+                    showToast(`Seluruh siswa pada kelas ini sudah tercatat kehadirannya untuk ${sesiJam}.`, 'info');
                     return;
                 }
 
-                showLoading('Menyimpan absensi siswa yang belum tercatat...');
+                showLoading(`Menyimpan absensi ${sesiJam}...`);
                 let listAbsen = [];
                 rows.forEach(row => {
                     const nisVal = row.getAttribute('data-nis');
                     if (!alreadyScannedNisSet.has(normalizeNis(nisVal))) {
                         listAbsen.push({
                             tanggal: tanggal,
+                            sesi_jam: sesiJam,
+                            mapel: mapel,
+                            guru_pengabsen: guruPengabsen,
                             nis: nisVal,
-                            kegiatan: kegiatan,
                             status: row.querySelector('.status-absen').value,
                             keterangan: row.querySelector('.ket-absen').value || '-'
                         });
@@ -2091,16 +2340,16 @@
                     return;
                 }
 
-                const { error } = await sb.from('absensi').insert(listAbsen);
+                const { error } = await insertAttendanceSafe(listAbsen);
                 hideLoading();
                 if (!error) {
-                    showToast(`Berhasil! Absensi ${listAbsen.length} siswa baru telah dicatat.`, 'success');
+                    showToast(`Berhasil! Absensi ${listAbsen.length} siswa (${sesiJam} - ${mapel}) dicatat oleh ${guruPengabsen}.`, 'success');
 
                     if (sendWaNonHadir) {
                         const nonHadirList = listAbsen.filter(a => a.status !== 'Hadir');
                         nonHadirList.forEach(item => {
                             const st = cachedAllStudents.find(s => normalizeNis(s.nis) === normalizeNis(item.nis));
-                            if (st) sendWhatsappNotification(st, kegiatan, item.status, tanggal, item.keterangan);
+                            if (st) sendWhatsappNotification(st, sesiJam, item.status, tanggal, item.keterangan, mapel, guruPengabsen);
                         });
                     }
 
@@ -2350,6 +2599,56 @@
                 }).join('');
         }
 
+        function renderRincianIzinDanAlpha(list) {
+            const izinEl = document.getElementById('rincianIzinList');
+            const alphaEl = document.getElementById('rincianAlphaList');
+            if (!izinEl || !alphaEl) return;
+
+            const buildGroupedHtml = (targetStatus, badgeClass, emptyText) => {
+                const matching = (list || []).filter(r => String(r.status || '').trim().toLowerCase() === targetStatus);
+                if (matching.length === 0) {
+                    return `<p class="text-slate-400 italic">${emptyText}</p>`;
+                }
+
+                const byDate = {};
+                matching.forEach(item => {
+                    const tglKey = String(item.tanggal || '-').substring(0, 10);
+                    if (!byDate[tglKey]) byDate[tglKey] = [];
+                    byDate[tglKey].push(item);
+                });
+
+                return Object.keys(byDate).sort().reverse().map(tglKey => {
+                    const entries = byDate[tglKey].sort((a, b) => urutanSesiJam(a.sesi_jam || a.kegiatan) - urutanSesiJam(b.sesi_jam || b.kegiatan));
+                    const jamLabels = entries.map(en => en.sesi_jam || en.kegiatan || 'Sesi');
+                    const isFullDay = entries.length >= 3;
+
+                    const bulletItems = entries.map(en => {
+                        const sesiLabel = en.sesi_jam || en.kegiatan || '-';
+                        const mapelText = en.mapel && en.mapel !== '-' ? ` • Mapel: <b>${en.mapel}</b>` : '';
+                        const guruText = en.guru_pengabsen && en.guru_pengabsen !== '-' ? ` • Guru: ${en.guru_pengabsen}` : '';
+                        const ketText = en.keterangan && en.keterangan !== '-' ? ` (${en.keterangan})` : '';
+                        return `<li class="text-[11px] text-slate-600">• <strong>${sesiLabel}</strong>${mapelText}${guruText}${ketText}</li>`;
+                    }).join('');
+
+                    return `
+                        <div class="p-2.5 rounded-lg border border-slate-200 bg-slate-50/80 space-y-1">
+                            <div class="flex flex-wrap items-center justify-between gap-1">
+                                <span class="font-bold text-slate-800 text-xs">${formatDateWithDay(tglKey)}</span>
+                                <div class="flex items-center gap-1">
+                                    <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${badgeClass}">${jamLabels.join(', ')}</span>
+                                    <span class="px-1.5 py-0.5 rounded bg-slate-200 text-slate-700 text-[10px] font-semibold">${isFullDay ? '1 Hari Penuh (3 Jam)' : `${entries.length} Jam`}</span>
+                                </div>
+                            </div>
+                            <ul class="space-y-0.5 pl-1">${bulletItems}</ul>
+                        </div>
+                    `;
+                }).join('');
+            };
+
+            izinEl.innerHTML = buildGroupedHtml('izin', 'bg-teal-100 text-teal-800', 'Tidak ada catatan izin pada periode ini.');
+            alphaEl.innerHTML = buildGroupedHtml('alpha', 'bg-red-100 text-red-800', 'Alhamdulillah, tidak ada catatan alpha pada periode ini.');
+        }
+
         function filterAttendanceByMonth() {
             const selectedVal = document.getElementById('filterBulanAbsen').value;
             const attBody = document.getElementById('attendanceTableBody');
@@ -2368,17 +2667,45 @@
                     else if (status === 'Alpha') countAlpha++;
 
                     let badgeColor = status === 'Hadir' ? 'bg-green-100 text-green-800' : (status === 'Sakit' ? 'bg-amber-100 text-amber-800' : (status === 'Izin' ? 'bg-teal-100 text-teal-800' : 'bg-red-100 text-red-800'));
-                    return `<tr><td class="p-3 text-slate-600 text-xs font-medium">${formatDateWithDay(item.tanggal)}</td><td class="p-3 font-medium">${item.kegiatan || 'Harian'}</td><td class="p-3"><span class="px-2 py-0.5 rounded-full text-xs font-semibold ${badgeColor}">${status}</span></td><td class="p-3 text-slate-500 text-xs">${item.keterangan || '-'}</td></tr>`;
+                    const sesiTampil = item.sesi_jam || item.kegiatan || 'Jam Ke-1';
+                    const jamScan = item.waktu_scan ? new Date(item.waktu_scan).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) : '';
+                    const waktuInfo = jamScan ? `${sesiTampil} • ${jamScan} WIB` : sesiTampil;
+                    const mapelInfo = item.mapel && item.mapel !== '-' ? item.mapel : '-';
+                    const guruInfo = item.guru_pengabsen && item.guru_pengabsen !== '-' ? item.guru_pengabsen : '-';
+
+                    return `
+                        <tr>
+                            <td class="p-3 text-slate-700 text-xs font-semibold">${formatDateWithDay(item.tanggal)}</td>
+                            <td class="p-3 text-xs font-bold text-green-900">${waktuInfo}</td>
+                            <td class="p-3 text-xs text-slate-700">
+                                <div class="font-semibold">${mapelInfo}</div>
+                                <div class="text-[11px] text-slate-500">Guru: ${guruInfo}</div>
+                            </td>
+                            <td class="p-3"><span class="px-2 py-0.5 rounded-full text-xs font-semibold ${badgeColor}">${status}</span></td>
+                            <td class="p-3 text-slate-500 text-xs">${item.keterangan || '-'}</td>
+                        </tr>
+                    `;
                 }).join('');
             } else {
-                attBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-400">Tidak ada data absensi pada periode ini.</td></tr>`;
+                attBody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-slate-400">Tidak ada data absensi pada periode ini.</td></tr>`;
             }
 
-            document.getElementById('rekapHadir').textContent = countHadir;
-            document.getElementById('rekapIzin').textContent = countIzin;
-            document.getElementById('rekapSakit').textContent = countSakit;
-            document.getElementById('rekapAlpha').textContent = countAlpha;
-            document.getElementById('statAttendance').textContent = `${countHadir} Hari`;
+            document.getElementById('rekapHadir').textContent = `${countHadir} Sesi`;
+            document.getElementById('rekapIzin').textContent = `${countIzin} Sesi`;
+            document.getElementById('rekapSakit').textContent = `${countSakit} Sesi`;
+            document.getElementById('rekapAlpha').textContent = `${countAlpha} Sesi`;
+
+            document.getElementById('estHariHadir').textContent = konversiSesiKeHari(countHadir);
+            document.getElementById('estHariIzin').textContent = konversiSesiKeHari(countIzin);
+            document.getElementById('estHariSakit').textContent = konversiSesiKeHari(countSakit);
+            document.getElementById('estHariAlpha').textContent = `${konversiSesiKeHari(countAlpha)} (3 sesi = 1 hari)`;
+
+            document.getElementById('statAttendance').textContent = `${countHadir} Sesi`;
+            const statDaysEl = document.getElementById('statAttendanceDays');
+            if (statDaysEl) statDaysEl.textContent = `${konversiSesiKeHari(countHadir)} (3 jam/hari)`;
+
+            renderRincianIzinDanAlpha(filtered);
+            renderIconsSafe(document.getElementById('rincianIzinAlphaContainer'));
         }
 
         function setupScoreFilterDropdowns(scoreList) {
@@ -2468,7 +2795,8 @@
 
         function formatDateWithDay(dateString) {
             if (!dateString) return '-';
-            const date = new Date(dateString);
+            const cleanStr = String(dateString).substring(0, 10);
+            const date = new Date(`${cleanStr}T12:00:00`);
             if (isNaN(date)) return dateString;
             const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
             return `${days[date.getDay()]}, ${date.toLocaleDateString('id-ID')}`;
@@ -2479,6 +2807,7 @@
             showLoading('Keluar dari sistem...');
             setTimeout(() => {
                 hideLoading();
+                currentStaffName = 'Administrator MIS Ihyaul Islam';
                 document.getElementById('loginRoleType').value = '';
                 switchView('home');
                 showToast('Anda telah berhasil keluar.', 'info');
@@ -2584,26 +2913,41 @@
             }
 
             const tanggal = document.getElementById('scanTanggal').value;
-            const kegiatan = document.getElementById('scanKegiatan').value;
+            const sesiJam = document.getElementById('scanSesiJam')?.value || 'Jam Ke-1';
+            const mapel = document.getElementById('scanMapel')?.value || '-';
+            const guruPengabsen = document.getElementById('scanGuruPengabsen')?.value.trim() || currentStaffName;
             const sendWa = document.getElementById('waNotifyBarcodeToggle')?.checked;
 
-            const { data: existing } = await sb.from('absensi')
+            let existing = [];
+            const resBySesi = await sb.from('absensi')
                 .select('id, status')
                 .eq('nis', student.nis)
                 .eq('tanggal', tanggal)
-                .eq('kegiatan', kegiatan)
+                .eq('sesi_jam', sesiJam)
                 .limit(1);
 
-            if (existing && existing.length > 0) {
+            if (!resBySesi.error) {
+                existing = resBySesi.data || [];
+            } else {
+                const resFallback = await sb.from('absensi')
+                    .select('id, status, kegiatan')
+                    .eq('nis', student.nis)
+                    .eq('tanggal', tanggal);
+                existing = (resFallback.data || []).filter(r => String(r.kegiatan || '').includes(sesiJam));
+            }
+
+            if (existing.length > 0) {
                 playScanBeep(false);
-                showToast(`${student.nama} sudah tercatat (${existing[0].status}) untuk ${kegiatan} hari ini.`, "info");
+                showToast(`${student.nama} sudah tercatat (${existing[0].status}) pada ${sesiJam} hari ini.`, "info");
                 return;
             }
 
-            const { error } = await sb.from('absensi').insert([{
+            const { error } = await insertAttendanceSafe([{
                 tanggal: tanggal,
+                sesi_jam: sesiJam,
+                mapel: mapel,
+                guru_pengabsen: guruPengabsen,
                 nis: student.nis,
-                kegiatan: kegiatan,
                 status: 'Hadir',
                 keterangan: 'Scan Barcode'
             }]);
@@ -2611,11 +2955,11 @@
             if (!error) {
                 playScanBeep(true);
                 const waktu = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-                showToast(`Hadir: ${student.nama} (${student.kelas})`, "success");
+                showToast(`Hadir: ${student.nama} (${sesiJam})`, "success");
 
                 let waBadge = '';
                 if (sendWa && WA_GATEWAY_TOKEN && !WA_GATEWAY_TOKEN.includes("ISI_TOKEN")) {
-                    const waSent = await sendWhatsappNotification(student, kegiatan, 'Hadir', tanggal, 'Scan Barcode');
+                    const waSent = await sendWhatsappNotification(student, sesiJam, 'Hadir', tanggal, 'Scan Barcode', mapel, guruPengabsen);
                     waBadge = waSent
                         ? `<span class="text-[10px] bg-teal-100 text-teal-800 px-1.5 py-0.5 rounded font-semibold">WA Terkirim</span>`
                         : `<span class="text-[10px] bg-red-100 text-red-700 px-1.5 py-0.5 rounded font-semibold">WA Gagal</span>`;
@@ -2627,7 +2971,8 @@
                         <div class="p-2.5 rounded-lg bg-green-50 border border-green-200 flex justify-between items-center gap-2">
                             <div>
                                 <p class="font-bold text-green-900 flex items-center gap-1.5">${student.nama} ${waBadge}</p>
-                                <p class="text-[11px] text-green-700">NIS: ${student.nis} &bull; ${student.kelas} &bull; ${kegiatan}</p>
+                                <p class="text-[11px] text-green-800">NIS: ${student.nis} &bull; ${student.kelas} &bull; <strong>${sesiJam}</strong> (${mapel})</p>
+                                <p class="text-[10px] text-green-700">Guru Pengabsen: ${guruPengabsen}</p>
                             </div>
                             <span class="text-[11px] font-mono font-bold bg-green-700 text-white px-2 py-0.5 rounded shrink-0">${waktu}</span>
                         </div>
@@ -2645,7 +2990,9 @@
             const status = document.getElementById('quickAbsenStatus')?.value || 'Izin';
             const ket = document.getElementById('quickAbsenKet')?.value.trim() || '-';
             const tanggal = document.getElementById('scanTanggal').value;
-            const kegiatan = document.getElementById('scanKegiatan').value;
+            const sesiJam = document.getElementById('scanSesiJam')?.value || 'Jam Ke-1';
+            const mapel = document.getElementById('scanMapel')?.value || '-';
+            const guruPengabsen = document.getElementById('scanGuruPengabsen')?.value.trim() || currentStaffName;
             const sendWa = document.getElementById('waNotifyBarcodeToggle')?.checked;
 
             if (!nis) {
@@ -2656,36 +3003,49 @@
             const student = cachedAllStudents.find(s => normalizeNis(s.nis) === normalizeNis(nis));
             if (!student) return;
 
-            const { data: existing } = await sb.from('absensi')
+            let existing = [];
+            const resBySesi = await sb.from('absensi')
                 .select('id, status')
                 .eq('nis', student.nis)
                 .eq('tanggal', tanggal)
-                .eq('kegiatan', kegiatan)
+                .eq('sesi_jam', sesiJam)
                 .limit(1);
 
-            if (existing && existing.length > 0) {
-                showToast(`${student.nama} sudah tercatat (${existing[0].status}) pada ${kegiatan} hari ini.`, "error");
+            if (!resBySesi.error) {
+                existing = resBySesi.data || [];
+            } else {
+                const resFallback = await sb.from('absensi')
+                    .select('id, status, kegiatan')
+                    .eq('nis', student.nis)
+                    .eq('tanggal', tanggal);
+                existing = (resFallback.data || []).filter(r => String(r.kegiatan || '').includes(sesiJam));
+            }
+
+            if (existing.length > 0) {
+                showToast(`${student.nama} sudah tercatat (${existing[0].status}) pada ${sesiJam} hari ini.`, "error");
                 return;
             }
 
-            showLoading(`Menyimpan status ${status} untuk ${student.nama}...`);
-            const { error } = await sb.from('absensi').insert([{
+            showLoading(`Menyimpan status ${status} (${sesiJam}) untuk ${student.nama}...`);
+            const { error } = await insertAttendanceSafe([{
                 tanggal: tanggal,
+                sesi_jam: sesiJam,
+                mapel: mapel,
+                guru_pengabsen: guruPengabsen,
                 nis: student.nis,
-                kegiatan: kegiatan,
                 status: status,
                 keterangan: ket
             }]);
             hideLoading();
 
             if (!error) {
-                showToast(`Tercatat ${status}: ${student.nama}`, "success");
+                showToast(`Tercatat ${status}: ${student.nama} (${sesiJam})`, "success");
                 document.getElementById('quickAbsenNis').value = '';
                 document.getElementById('quickAbsenKet').value = '';
 
                 let waBadge = '';
                 if (sendWa && WA_GATEWAY_TOKEN && !WA_GATEWAY_TOKEN.includes("ISI_TOKEN")) {
-                    const waSent = await sendWhatsappNotification(student, kegiatan, status, tanggal, ket);
+                    const waSent = await sendWhatsappNotification(student, sesiJam, status, tanggal, ket, mapel, guruPengabsen);
                     waBadge = waSent
                         ? `<span class="text-[10px] bg-teal-100 text-teal-800 px-1.5 py-0.5 rounded font-semibold">WA Terkirim</span>`
                         : `<span class="text-[10px] bg-red-100 text-red-700 px-1.5 py-0.5 rounded font-semibold">WA Gagal</span>`;
@@ -2698,7 +3058,8 @@
                         <div class="p-2.5 rounded-lg bg-amber-50 border border-amber-200 flex justify-between items-center gap-2">
                             <div>
                                 <p class="font-bold text-amber-900 flex items-center gap-1.5">${student.nama} ${waBadge}</p>
-                                <p class="text-[11px] text-amber-700">NIS: ${student.nis} &bull; ${student.kelas} &bull; ${kegiatan} (${ket})</p>
+                                <p class="text-[11px] text-amber-800">NIS: ${student.nis} &bull; ${student.kelas} &bull; <strong>${sesiJam}</strong> (${mapel})</p>
+                                <p class="text-[10px] text-amber-700">Guru: ${guruPengabsen} &bull; Ket: ${ket}</p>
                             </div>
                             <span class="text-[11px] font-bold bg-amber-600 text-white px-2 py-0.5 rounded shrink-0">${status}</span>
                         </div>
